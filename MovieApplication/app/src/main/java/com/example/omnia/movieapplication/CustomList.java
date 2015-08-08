@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -17,23 +16,31 @@ import java.util.ArrayList;
  */
 public class CustomList extends ArrayAdapter<String> {
     private final Activity context;
-    private final ArrayList<String> filmTitles;
-    private final ArrayList<String> imagesUrl;
-    public CustomList(Activity context, ArrayList<String> filmTitles, ArrayList<String> imagesUrl) {
-        super(context, R.layout.list_item_film, filmTitles);
+
+    private  ArrayList<String> imagesUrl;
+    private  ArrayList<String> ids;
+    public CustomList(Activity context, ArrayList<String> imagesUrl) {
+        super(context, R.layout.list_item_film, imagesUrl);
         this.context = context;
-        this.filmTitles = filmTitles;
         this.imagesUrl = imagesUrl;
+        ids = new ArrayList<String>();
 
     }
+
+
+    public ArrayList<String> getImagesUrl() {
+        return imagesUrl;
+    }
+
+    public ArrayList<String> getIds() {
+        return ids;
+    }
+
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView= inflater.inflate(R.layout.list_item_film, null, true);
-        TextView txtTitle = (TextView) rowView.findViewById(R.id.film_title);
-
         ImageView imageView = (ImageView) rowView.findViewById(R.id.one_film_image);
-        txtTitle.setText(filmTitles.get(position));
         Picasso.with(context).load(imagesUrl.get(position)).into(imageView);
         return rowView;
     }
