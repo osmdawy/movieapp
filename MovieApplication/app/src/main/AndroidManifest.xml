@@ -24,6 +24,10 @@
             android:name=".FilmDetailActivity"
             android:label="@string/title_activity_film_detail" >
         </activity>
+        <provider
+            android:name="data.MovieProvider"
+            android:authorities="com.example.omnia.movieapplication.provider"
+            android:exported="false" />
     </application>
 
 </manifest>
